@@ -38,7 +38,8 @@
 
   function titleRow(item, langClass) {
     const title = el("h3", { class: "card-title" }, item.title);
-    title.appendChild(el("span", { class: "badge " + (langClass || ""), text: item.lang }));
+    if (item.lang) title.appendChild(el("span", { class: "badge " + (langClass || ""), text: item.lang }));
+    if (item.practice) title.appendChild(el("span", { class: "tag-practice", text: "practice" }));
     if (item.local) title.appendChild(el("span", { class: "tag-local", text: "local" }));
     if (item.status) title.appendChild(el("span", { class: "status", text: item.status }));
     return title;

@@ -5,10 +5,6 @@
     grid-template-columns: 1fr;
     gap: var(--space-5);
   }
-  .hero-img {
-    width: 96px;
-    height: 96px;
-  }
   .hero-title {
     font-size: var(--fs-2xl);
   }

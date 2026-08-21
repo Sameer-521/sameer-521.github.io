@@ -105,21 +105,25 @@ const PORTFOLIO_DATA = {
     {
       title: "my_circuits",
       desc: "ngspice/Qucs simulation practice: op-amp, rectifier, transformer, transistor amplifier, Y-resistor network, armature short-circuit.",
+      practice: true,
       local: true,
     },
     {
       title: "Experiments-Guides",
       desc: "A DC generator experiment writeup done in Qucs, plus a zener-vs-GnP diode comparison in ngspice.",
+      practice: true,
       local: true,
     },
     {
       title: "Complex Variables roadmap",
       desc: "A self-study topic roadmap for Functions of a Complex Variable (Laplace's equation, Cauchy\u2013Riemann, harmonic functions).",
+      practice: true,
       local: true,
     },
     {
       title: "STM32 embedded",
       desc: "Early exploration with STM32CubeIDE; paused until hardware is available.",
+      practice: true,
       status: "in progress / on hold",
     },
   ],

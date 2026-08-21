@@ -70,12 +70,22 @@
 
 /* Hero */
 .hero-img {
-  width: 128px;
-  height: 128px;
-  border-radius: var(--radius-lg);
+  width: 160px;
+  height: 160px;
+  border-radius: 16px; /* match the SVG's own rx=16 corners */
+}
+.hero-des {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--color-accent);
   border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius);
+  padding: 0.15em 0.6em;
+  margin-bottom: var(--space-3);
   background: var(--color-surface);
-  padding: var(--space-2);
 }
 .hero-title {
   font-size: var(--fs-3xl);
@@ -101,7 +111,7 @@
   flex-wrap: wrap;
 }
 
-/* Buttons */
+/* Buttons — palette ported from kimi build: muted trace green, brightens on hover */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -110,24 +120,25 @@
   font-size: var(--fs-sm);
   padding: var(--space-2) var(--space-4);
   border-radius: var(--radius);
-  border: 1px solid var(--color-border-strong);
-  color: var(--color-text);
+  border: 1px solid var(--color-accent-muted);
+  color: var(--color-accent-muted);
   background: transparent;
   transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
 .btn:hover {
   color: var(--color-accent);
   border-color: var(--color-accent);
+  background: rgba(47, 208, 122, 0.12);
 }
 .btn--primary {
-  background: var(--color-accent);
+  background: var(--color-accent-muted);
   color: var(--color-bg);
-  border-color: var(--color-accent);
+  border-color: var(--color-accent-muted);
   font-weight: 600;
 }
 .btn--primary:hover {
-  background: var(--color-accent-muted);
-  border-color: var(--color-accent-muted);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
   color: var(--color-bg);
 }
 
@@ -241,6 +252,9 @@
   gap: var(--space-2);
   flex-wrap: wrap;
 }
+.card p {
+  max-width: none;
+}
 .card-desc {
   color: var(--color-text-muted);
   font-size: var(--fs-sm);
@@ -272,6 +286,17 @@
 }
 .badge--c {
   color: var(--color-c);
+}
+.tag-practice {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-muted);
+  border: 1px solid var(--color-accent-muted);
+  padding: 0.1em 0.45em;
+  border-radius: 3px;
+  line-height: 1;
 }
 .tag-local {
   font-family: var(--font-mono);
@@ -321,14 +346,14 @@
 .chip {
   font-family: var(--font-mono);
   font-size: var(--fs-sm);
-  padding: 0.2em 0.6em;
+  padding: 0.35em 0.7em;
   border: 1px solid var(--color-border-strong);
-  border-radius: 999px;
+  border-radius: var(--radius-lg);
   color: var(--color-text-muted);
   background: var(--color-surface-2);
   overflow-wrap: anywhere;
   max-width: 100%;
-  line-height: 1.35;
+  line-height: 1.45;
 }
 
 /* Contact */
