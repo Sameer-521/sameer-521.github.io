@@ -398,3 +398,85 @@
   0% { transform: translateX(-100%); }
   100% { transform: translateX(400%); }
 }
+
+/* Probe tip cursor — trailing crosshair reticle (the real cursor is
+ * skinned by the rules at the end of this file). Desktop/fine-pointer
+ * only; never injected under touch or prefers-reduced-motion. */
+.probe {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 200;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  will-change: transform;
+}
+.probe.visible {
+  opacity: 1;
+}
+.probe-ring {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  transition: transform 0.18s ease;
+}
+.probe-ring::before,
+.probe-ring::after {
+  content: "";
+  position: absolute;
+  background: rgba(57, 255, 20, 0.5);
+}
+.probe-ring::before {
+  left: 50%;
+  top: -5px;
+  width: 1px;
+  height: 34px;
+  transform: translateX(-0.5px);
+}
+.probe-ring::after {
+  top: 50%;
+  left: -5px;
+  height: 1px;
+  width: 34px;
+  transform: translateY(-0.5px);
+}
+.probe-label {
+  position: absolute;
+  left: 14px;
+  top: -12px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: var(--color-accent-muted);
+  opacity: 0;
+  transform: translateY(3px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+.probe--lock .probe-ring {
+  transform: scale(0.55);
+}
+.probe--lock .probe-ring::before,
+.probe--lock .probe-ring::after {
+  background: var(--color-accent);
+}
+.probe--lock .probe-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Skin the real cursor as a probe ring reticle (fine pointers only).
+ * Hotspot stays at the center of the ring, so clicking stays precise. */
+@media (pointer: fine) {
+  body {
+    cursor: var(--probe-cursor) 12 12, auto;
+  }
+  a,
+  button {
+    cursor: var(--probe-cursor) 12 12, pointer;
+  }
+}

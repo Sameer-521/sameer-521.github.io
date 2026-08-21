@@ -34,6 +34,9 @@
 
   /* Animation */
   --trace-duration: 2.6s;
+
+  /* Probe cursor skin (24px inline SVG, hotspot at center) */
+  --probe-cursor: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3E%3Ccircle%20cx='12'%20cy='12'%20r='10'%20fill='none'%20stroke='%2339ff14'%20stroke-width='1.5'/%3E%3Ccircle%20cx='12'%20cy='12'%20r='2'%20fill='%2339ff14'/%3E%3C/svg%3E");
 }
 
 body {
