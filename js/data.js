@@ -56,10 +56,10 @@ const PORTFOLIO_DATA = {
       repo: "https://github.com/Sameer-521/system-monitor",
     },
     {
-      title: "utils",
+      title: "crun",
       lang: "Python",
-      desc: "Personal tooling: `crun` (compile-and-run for C with caching), Neovim plugin specs, a KDE Plasma layout save/restore REPL, and a config backup script.",
-      repo: "https://github.com/Sameer-521/utils",
+      desc: "Compiles, runs, and cleans up a C source file in a single command \u2014 like go run, but for C. Caches binaries in ~/.cache/crun/ to skip recompilation, forwards exit codes, and reports signal crashes (e.g. SIGSEGV).",
+      repo: "https://github.com/Sameer-521/utils/tree/main/crun",
     },
     {
       title: "library-mgmt-system-API",
