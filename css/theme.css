@@ -28,7 +28,7 @@
   --color-local: #8a98a8;
 
   /* Grid background */
-  --grid-line: rgba(255, 255, 255, 0.030);
+  --grid-line: rgba(255, 255, 255, 0.03);
   --grid-line-strong: rgba(47, 208, 122, 0.055);
   --grid-size: 32px;
 

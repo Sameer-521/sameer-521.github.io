@@ -123,7 +123,10 @@
   border: 1px solid var(--color-accent-muted);
   color: var(--color-accent-muted);
   background: transparent;
-  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease;
 }
 .btn:hover {
   color: var(--color-accent);
@@ -239,7 +242,9 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
-  transition: border-color 0.15s ease, transform 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    transform 0.15s ease;
 }
 .card:hover {
   border-color: var(--color-border-strong);
@@ -391,12 +396,21 @@
   position: absolute;
   inset: 0;
   width: 30%;
-  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-accent),
+    transparent
+  );
   animation: trace-sweep var(--trace-duration) ease-in-out infinite;
 }
 @keyframes trace-sweep {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(400%); }
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(400%);
+  }
 }
 
 /* Probe tip cursor — trailing crosshair reticle (the real cursor is
@@ -454,7 +468,9 @@
   color: var(--color-accent-muted);
   opacity: 0;
   transform: translateY(3px);
-  transition: opacity 0.15s ease, transform 0.15s ease;
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
   white-space: nowrap;
 }
 .probe--lock .probe-ring {
@@ -480,7 +496,9 @@
   border-radius: 999px;
   background: transparent;
   color: var(--color-text-dim);
-  transition: color 0.15s ease, border-color 0.15s ease;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
 }
 .sig-toggle:hover {
   color: var(--color-text);
@@ -506,10 +524,14 @@
  * Hotspot stays at the center of the ring, so clicking stays precise. */
 @media (pointer: fine) {
   body {
-    cursor: var(--probe-cursor) 12 12, auto;
+    cursor:
+      var(--probe-cursor) 12 12,
+      auto;
   }
   a,
   button {
-    cursor: var(--probe-cursor) 12 12, pointer;
+    cursor:
+      var(--probe-cursor) 12 12,
+      pointer;
   }
 }

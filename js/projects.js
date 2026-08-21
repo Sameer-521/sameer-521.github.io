@@ -38,34 +38,62 @@
 
   function titleRow(item, langClass) {
     const title = el("h3", { class: "card-title" }, item.title);
-    if (item.lang) title.appendChild(el("span", { class: "badge " + (langClass || ""), text: item.lang }));
-    if (item.practice) title.appendChild(el("span", { class: "tag-practice", text: "practice" }));
-    if (item.local) title.appendChild(el("span", { class: "tag-local", text: "local" }));
-    if (item.status) title.appendChild(el("span", { class: "status", text: item.status }));
+    if (item.lang)
+      title.appendChild(
+        el("span", { class: "badge " + (langClass || ""), text: item.lang }),
+      );
+    if (item.practice)
+      title.appendChild(
+        el("span", { class: "tag-practice", text: "practice" }),
+      );
+    if (item.local)
+      title.appendChild(el("span", { class: "tag-local", text: "local" }));
+    if (item.status)
+      title.appendChild(el("span", { class: "status", text: item.status }));
     return title;
   }
 
   function projectCard(p) {
     const foot = el("div", { class: "card-foot" });
     if (p.repo) {
-      foot.appendChild(el("a", { class: "card-link", href: p.repo, target: "_blank", rel: "noopener noreferrer", text: "repo \u2192" }));
+      foot.appendChild(
+        el("a", {
+          class: "card-link",
+          href: p.repo,
+          target: "_blank",
+          rel: "noopener noreferrer",
+          text: "repo \u2192",
+        }),
+      );
     }
-    return el("article", { class: "card" },
+    return el(
+      "article",
+      { class: "card" },
       titleRow(p, p.lang === "C" ? "badge--c" : ""),
       desc(p.desc),
-      foot
+      foot,
     );
   }
 
   function circuitCard(c) {
     const foot = el("div", { class: "card-foot" });
     if (c.repo) {
-      foot.appendChild(el("a", { class: "card-link", href: c.repo, target: "_blank", rel: "noopener noreferrer", text: "repo \u2192" }));
+      foot.appendChild(
+        el("a", {
+          class: "card-link",
+          href: c.repo,
+          target: "_blank",
+          rel: "noopener noreferrer",
+          text: "repo \u2192",
+        }),
+      );
     }
-    return el("article", { class: "card" },
+    return el(
+      "article",
+      { class: "card" },
       titleRow(c, ""),
       desc(c.desc),
-      foot
+      foot,
     );
   }
 

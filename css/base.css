@@ -13,8 +13,12 @@
   --space-9: 6rem;
 
   /* Fonts — system stacks only */
-  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "DejaVu Sans Mono", "Liberation Mono", Menlo, Consolas, monospace;
-  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono:
+    ui-monospace, "SF Mono", "Cascadia Code", "DejaVu Sans Mono",
+    "Liberation Mono", Menlo, Consolas, monospace;
+  --font-sans:
+    system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    sans-serif;
 
   /* Sizing */
   --fs-sm: 0.875rem;
@@ -71,7 +75,9 @@ a {
   color: var(--color-accent-muted);
   text-decoration: none;
   border-bottom: 1px solid transparent;
-  transition: border-color 0.15s ease, color 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
 
 a:hover {
@@ -85,7 +91,10 @@ a:hover {
   border-radius: 2px;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   font-family: var(--font-mono);
   font-weight: 600;
   line-height: var(--lh-tight);
@@ -97,7 +106,8 @@ p {
   max-width: 68ch;
 }
 
-ul, ol {
+ul,
+ol {
   padding-left: 1.25rem;
 }
 

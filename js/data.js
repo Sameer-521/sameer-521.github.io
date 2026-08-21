@@ -19,7 +19,12 @@ const PORTFOLIO_DATA = {
     },
     {
       label: "C",
-      items: ["K.N. King coursework", "small systems (sqlite-style REPL)", "bit ops", "GDB"],
+      items: [
+        "K.N. King coursework",
+        "small systems (sqlite-style REPL)",
+        "bit ops",
+        "GDB",
+      ],
     },
     {
       label: "EE tooling",
@@ -27,11 +32,13 @@ const PORTFOLIO_DATA = {
     },
     {
       label: "Embedded",
-      items: ["STM32CubeIDE (early exploration \u2014 on hold, no hardware yet)"],
+      items: [
+        "STM32CubeIDE (early exploration \u2014 on hold, no hardware yet)",
+      ],
     },
     {
       label: "Editor / tooling",
-      items: ["Neovim (Lua configs)", "Fish shell", "Linux/KDE"],
+      items: ["Neovim (Lazyvim)", "Fish shell", "Linux/KDE"],
     },
   ],
 
@@ -84,7 +91,7 @@ const PORTFOLIO_DATA = {
     {
       title: "K.N-King-Projects-Solutions",
       lang: "C",
-      desc: "Solutions to the programming projects in \"C Programming: A Modern Approach\" (2nd ed.) by K. N. King.",
+      desc: 'Solutions to the programming projects in "C Programming: A Modern Approach" (2nd ed.) by K. N. King.',
       repo: "https://github.com/Sameer-521/K.N-King-Projects-Solutions",
     },
     {

@@ -18,7 +18,9 @@
   }
 
   // Active section highlight via IntersectionObserver
-  const navAnchors = Array.prototype.slice.call(document.querySelectorAll(".nav-links a"));
+  const navAnchors = Array.prototype.slice.call(
+    document.querySelectorAll(".nav-links a"),
+  );
   const sectionMap = new Map();
   navAnchors.forEach(function (a) {
     const id = a.getAttribute("href").slice(1);
@@ -27,17 +29,35 @@
   });
 
   if ("IntersectionObserver" in window && sectionMap.size) {
-    const observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) {
-          navAnchors.forEach(function (a) { a.classList.remove("active"); });
-          const a = sectionMap.get(e.target);
-          if (a) a.classList.add("active");
-        }
-      });
-    }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
+    const tracked = Array.from(sectionMap.keys()); // DOM order
+    const visible = new Set();
 
-    sectionMap.forEach(function (_, sec) { observer.observe(sec); });
+    const observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) visible.add(e.target);
+          else visible.delete(e.target);
+        });
+
+        navAnchors.forEach(function (a) {
+          a.classList.remove("active");
+        });
+
+        // Nothing in the observation band (e.g. back at the hero) -> no active link
+        for (let i = 0; i < tracked.length; i++) {
+          if (visible.has(tracked[i])) {
+            const a = sectionMap.get(tracked[i]);
+            if (a) a.classList.add("active");
+            break; // topmost visible section wins
+          }
+        }
+      },
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
+    );
+
+    tracked.forEach(function (sec) {
+      observer.observe(sec);
+    });
   }
 
   // Current year in footer
@@ -55,11 +75,15 @@
   probe.className = "probe";
   probe.setAttribute("aria-hidden", "true");
   probe.innerHTML =
-    '<span class="probe-ring"></span>' +
-    '<span class="probe-label">CH1</span>';
+    '<span class="probe-ring"></span>' + '<span class="probe-label">CH1</span>';
   document.body.appendChild(probe);
 
-  let tx = 0, ty = 0, x = 0, y = 0, raf = null, started = false;
+  let tx = 0,
+    ty = 0,
+    x = 0,
+    y = 0,
+    raf = null,
+    started = false;
 
   function tick() {
     x += (tx - x) * 0.3;
@@ -76,18 +100,22 @@
     if (raf == null) raf = requestAnimationFrame(tick);
   }
 
-  window.addEventListener("pointermove", function (e) {
-    if (e.pointerType !== "mouse") return;
-    tx = e.clientX;
-    ty = e.clientY;
-    if (!started) {
-      started = true;
-      x = tx;
-      y = ty;
-      probe.classList.add("visible");
-    }
-    wake();
-  }, { passive: true });
+  window.addEventListener(
+    "pointermove",
+    function (e) {
+      if (e.pointerType !== "mouse") return;
+      tx = e.clientX;
+      ty = e.clientY;
+      if (!started) {
+        started = true;
+        x = tx;
+        y = ty;
+        probe.classList.add("visible");
+      }
+      wake();
+    },
+    { passive: true },
+  );
 
   document.addEventListener("pointerleave", function () {
     probe.classList.remove("visible");
@@ -119,7 +147,8 @@
   document.body.prepend(canvas);
   var ctx = canvas.getContext("2d");
 
-  var w = 0, h = 0;
+  var w = 0,
+    h = 0;
   function resize() {
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
     w = window.innerWidth;
@@ -135,14 +164,17 @@
     resizeTimer = setTimeout(resize, 150);
   });
 
-  var running = false, raf = null, last = 0;
+  var running = false,
+    raf = null,
+    last = 0;
 
   function channel(color, k, amp, speed, t) {
     ctx.beginPath();
     var mid = h * 0.5;
     for (var x = 0; x <= w; x += 4) {
       var y = mid + amp * Math.sin(x * k + t * speed);
-      if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      if (x === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
     }
     ctx.strokeStyle = color;
     ctx.lineWidth = 1;
@@ -156,7 +188,7 @@
     var t = ts / 1000;
     ctx.clearRect(0, 0, w, h);
     var band = h * 0.24;
-    channel("rgba(47, 208, 122, 0.12)", 0.045, band, 1.1, t);             // CH1 — trace green
+    channel("rgba(47, 208, 122, 0.12)", 0.045, band, 1.1, t); // CH1 — trace green
     channel("rgba(212, 163, 90, 0.08)", 0.031, band * 0.65, 0.7, t + 1.7); // CH2 — copper
   }
 
@@ -165,7 +197,8 @@
   btn.type = "button";
   btn.className = "sig-toggle";
   btn.setAttribute("aria-pressed", "false");
-  btn.innerHTML = '<span class="sig-icon" aria-hidden="true">~</span> <span class="sig-word">sig-gen</span> <span class="sig-state">off</span>';
+  btn.innerHTML =
+    '<span class="sig-icon" aria-hidden="true">~</span> <span class="sig-word">sig-gen</span> <span class="sig-state">off</span>';
   var navInner = document.querySelector(".nav-inner");
   if (navInner) navInner.appendChild(btn);
 
@@ -183,13 +216,23 @@
       raf = null;
       ctx.clearRect(0, 0, w, h);
     }
-    try { localStorage.setItem("sig-gen", on ? "1" : "0"); } catch (e) { /* private mode */ }
+    try {
+      localStorage.setItem("sig-gen", on ? "1" : "0");
+    } catch (e) {
+      /* private mode */
+    }
   }
 
-  btn.addEventListener("click", function () { setPower(!running); });
+  btn.addEventListener("click", function () {
+    setPower(!running);
+  });
 
   var saved = null;
-  try { saved = localStorage.getItem("sig-gen"); } catch (e) { /* ignore */ }
+  try {
+    saved = localStorage.getItem("sig-gen");
+  } catch (e) {
+    /* ignore */
+  }
   if (saved === "1") setPower(true);
 
   resize();

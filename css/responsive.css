@@ -49,7 +49,9 @@
     padding: 0 var(--space-4);
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.25s ease, padding 0.25s ease;
+    transition:
+      max-height 0.25s ease,
+      padding 0.25s ease;
   }
   .nav-links.open {
     max-height: 320px;
