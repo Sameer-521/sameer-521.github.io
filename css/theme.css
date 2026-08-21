@@ -1,0 +1,69 @@
+/* theme.css — EE color palette, dark theme tokens, background pattern */
+
+:root {
+  /* Core palette */
+  --color-bg: #0a0e14;
+  --color-surface: #0f141c;
+  --color-surface-2: #131a24;
+  --color-border: #1f2a38;
+  --color-border-strong: #2a3a4f;
+
+  /* Text */
+  --color-text: #d7e0ea;
+  --color-text-muted: #8a98a8;
+  --color-text-dim: #5a6878;
+
+  /* Accents — oscilloscope trace */
+  --color-accent: #39ff14;
+  --color-accent-muted: #2fd07a;
+  --color-accent-glow: rgba(57, 255, 20, 0.35);
+
+  /* Secondary accent — solder / PCB copper */
+  --color-copper: #d4a35a;
+  --color-copper-muted: #b07d36;
+
+  /* Badge / tag colors */
+  --color-py: #2fd07a;
+  --color-c: #d4a35a;
+  --color-local: #8a98a8;
+
+  /* Grid background */
+  --grid-line: rgba(255, 255, 255, 0.030);
+  --grid-line-strong: rgba(47, 208, 122, 0.055);
+  --grid-size: 32px;
+
+  /* Animation */
+  --trace-duration: 2.6s;
+}
+
+body {
+  background-color: var(--color-bg);
+  background-image:
+    linear-gradient(var(--grid-line-strong) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line-strong) 1px, transparent 1px),
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size:
+    var(--grid-size) var(--grid-size),
+    var(--grid-size) var(--grid-size),
+    calc(var(--grid-size) / 4) calc(var(--grid-size) / 4),
+    calc(var(--grid-size) / 4) calc(var(--grid-size) / 4);
+  background-position: -1px -1px;
+  color: var(--color-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .trace-line::after {
+    animation: none;
+    opacity: 0;
+  }
+}
