@@ -4,6 +4,11 @@
   .hero {
     grid-template-columns: 1fr;
     gap: var(--space-5);
+    justify-items: center;
+    text-align: center;
+  }
+  .hero-actions {
+    justify-content: center;
   }
   .hero-title {
     font-size: var(--fs-2xl);
@@ -14,6 +19,20 @@
   .nav-toggle {
     display: inline-flex;
     margin-left: auto;
+  }
+  /* keep the sig-gen pill inside the header row,
+   * and separated from the menu toggle */
+  .nav-inner {
+    gap: var(--space-3);
+  }
+  .sig-toggle {
+    font-size: 0.6rem;
+    padding: 0.25em 0.55em;
+    white-space: nowrap;
+    flex: none;
+  }
+  .hero {
+    padding-block: var(--space-7);
   }
   .nav-links {
     position: absolute;
@@ -64,6 +83,10 @@
 }
 
 @media (max-width: 480px) {
+  /* drop the word, keep icon + state so the pill stays compact */
+  .sig-toggle .sig-word {
+    display: none;
+  }
   .container {
     padding-inline: var(--space-4);
   }

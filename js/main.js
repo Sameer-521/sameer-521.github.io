@@ -105,3 +105,92 @@
     }
   });
 })();
+
+/* Bench signal generator — ambient two-channel oscillator backdrop.
+ * OFF by default: the SIG-GEN switch in the nav powers it on.
+ * No pointer interaction by design. Skipped under reduced-motion. */
+(function () {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  // Backdrop canvas
+  var canvas = document.createElement("canvas");
+  canvas.className = "osc-bg";
+  canvas.setAttribute("aria-hidden", "true");
+  document.body.prepend(canvas);
+  var ctx = canvas.getContext("2d");
+
+  var w = 0, h = 0;
+  function resize() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = window.innerWidth;
+    h = window.innerHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    if (!running) ctx.clearRect(0, 0, w, h);
+  }
+  var resizeTimer;
+  window.addEventListener("resize", function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(resize, 150);
+  });
+
+  var running = false, raf = null, last = 0;
+
+  function channel(color, k, amp, speed, t) {
+    ctx.beginPath();
+    var mid = h * 0.5;
+    for (var x = 0; x <= w; x += 4) {
+      var y = mid + amp * Math.sin(x * k + t * speed);
+      if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  function frame(ts) {
+    raf = requestAnimationFrame(frame);
+    if (ts - last < 33) return; // ~30fps is plenty for a bench backdrop
+    last = ts;
+    var t = ts / 1000;
+    ctx.clearRect(0, 0, w, h);
+    var band = h * 0.24;
+    channel("rgba(47, 208, 122, 0.12)", 0.045, band, 1.1, t);             // CH1 — trace green
+    channel("rgba(212, 163, 90, 0.08)", 0.031, band * 0.65, 0.7, t + 1.7); // CH2 — copper
+  }
+
+  // Power switch — injected only where the feature can actually run
+  var btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "sig-toggle";
+  btn.setAttribute("aria-pressed", "false");
+  btn.innerHTML = '<span class="sig-icon" aria-hidden="true">~</span> <span class="sig-word">sig-gen</span> <span class="sig-state">off</span>';
+  var navInner = document.querySelector(".nav-inner");
+  if (navInner) navInner.appendChild(btn);
+
+  function setPower(on) {
+    running = on;
+    canvas.classList.toggle("live", on);
+    btn.classList.toggle("on", on);
+    btn.setAttribute("aria-pressed", String(on));
+    btn.querySelector(".sig-state").textContent = on ? "on" : "off";
+    if (on) {
+      last = 0;
+      if (raf == null) raf = requestAnimationFrame(frame);
+    } else {
+      if (raf != null) cancelAnimationFrame(raf);
+      raf = null;
+      ctx.clearRect(0, 0, w, h);
+    }
+    try { localStorage.setItem("sig-gen", on ? "1" : "0"); } catch (e) { /* private mode */ }
+  }
+
+  btn.addEventListener("click", function () { setPower(!running); });
+
+  var saved = null;
+  try { saved = localStorage.getItem("sig-gen"); } catch (e) { /* ignore */ }
+  if (saved === "1") setPower(true);
+
+  resize();
+})();

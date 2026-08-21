@@ -469,6 +469,39 @@
   transform: translateY(0);
 }
 
+/* SIG-GEN power switch (nav) — powers the oscillator backdrop */
+.sig-toggle {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.3em 0.7em;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-text-dim);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.sig-toggle:hover {
+  color: var(--color-text);
+  border-color: var(--color-text-dim);
+}
+.sig-toggle .sig-icon {
+  color: inherit;
+  margin-right: 0.2em;
+}
+.sig-toggle .sig-state {
+  color: var(--color-text-dim);
+  margin-left: 0.3em;
+}
+.sig-toggle.on {
+  color: var(--color-accent);
+  border-color: var(--color-accent-muted);
+}
+.sig-toggle.on .sig-state {
+  color: var(--color-accent);
+}
+
 /* Skin the real cursor as a probe ring reticle (fine pointers only).
  * Hotspot stays at the center of the ring, so clicking stays precise. */
 @media (pointer: fine) {

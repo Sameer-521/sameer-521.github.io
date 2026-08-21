@@ -43,10 +43,10 @@
 
 /* Hero layout */
 .hero-section {
-  min-height: calc(100vh - 56px);
+  min-height: calc(100svh - 56px);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: safe center; /* fall back to start if content overflows */
   border-bottom: 1px solid var(--color-border);
 }
 .hero {

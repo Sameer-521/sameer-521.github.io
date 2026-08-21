@@ -47,6 +47,11 @@ html {
   scroll-behavior: smooth;
 }
 
+html,
+body {
+  overflow-x: clip; /* no decorative element may push the page wider */
+}
+
 body {
   font-family: var(--font-sans);
   font-size: var(--fs-base);
