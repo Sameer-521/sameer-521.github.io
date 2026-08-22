@@ -3,8 +3,7 @@
 """serve.py — serve the portfolio locally with Python's built-in http.server.
 
 Usage:
-    python serve.py [port]        (default port: 8000)
-
+    python3 serve.py [port]        (default port: 8000)
 Stop with Ctrl+C.
 """
 
@@ -12,7 +11,11 @@ import http.server
 import socketserver
 import sys
 
-PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8000
+try:
+    PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8000
+except ValueError:
+    print("Error: [port] must be a number.")
+    sys.exit(1)
 
 Handler = http.server.SimpleHTTPRequestHandler
 
