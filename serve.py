@@ -18,7 +18,7 @@ except ValueError:
     sys.exit(1)
 
 Handler = http.server.SimpleHTTPRequestHandler
-
+socketserver.TCPServer.allow_reuse_address = True
 
 def main():
     try:
