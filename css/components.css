@@ -381,6 +381,11 @@
   color: var(--color-text-muted);
 }
 
+.footer-links a {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+}
+
 /* Animated trace divider */
 .trace-line {
   height: 2px;
